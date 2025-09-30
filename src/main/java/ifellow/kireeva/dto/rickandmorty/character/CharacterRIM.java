@@ -2,15 +2,17 @@ package ifellow.kireeva.dto.rickandmorty.character;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
-import java.util.Date;
+
 
 @Getter
 @Setter
 @AllArgsConstructor
-public class Root {
+@NoArgsConstructor
+public class CharacterRIM {
     private int id;
     private String name;
     private String status;
@@ -22,5 +24,5 @@ public class Root {
     private String image;
     private ArrayList<String> episode;
     private String url;
-    private Date created;
+    private String created;
 }
