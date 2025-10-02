@@ -3,47 +3,58 @@ package ifellow.kireeva;
 import ifellow.kireeva.dto.rickandmorty.character.CharacterRIM;
 import ifellow.kireeva.steps.RickAndMortySteps;
 import ifellow.kireeva.utils.Config;
-import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import java.util.logging.Logger;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class RickAndMortyTests {
 
+    private static final Logger log = Logger.getLogger(RickAndMortyTests.class.getName());
+    private static RickAndMortySteps steps;
+    private static String characterName;
+
+    @BeforeAll
+    static void setUp() {
+        steps = new RickAndMortySteps();
+        characterName = Config.getProperty("rick_and_morty.character_name");
+    }
+
     @Test
-    @DisplayName("Check comparison of species and location")
     void rickAndMortyApiTest() {
+        CharacterRIM characterRIM = steps.getCharacterByName(characterName);
 
-        RickAndMortySteps steps = new RickAndMortySteps();
-        CharacterRIM morty = steps.getCharacterByName(Config.getProperty("rick_and_morty.character_name"));
+        assertNotNull(characterRIM, "Персонаж не найден в API");
+        assertEquals(characterName, characterRIM.getName(), "Найден не тот персонаж");
+        log.info(characterName + " найден.");
 
-        assertNotNull(morty, "Морти Смит не найден в API");
-        assertEquals("Morty Smith", morty.getName(), "Найден не тот персонаж");
-
-        assertFalse(morty.getEpisode().isEmpty(), "У Морти нет эпизодов");
-        String lastEpisodeUrl = morty.getEpisode().get(morty.getEpisode().size() - 1);
+        assertFalse(characterRIM.getEpisode().isEmpty(), "У персонажа нет эпизодов");
+        String lastEpisodeUrl = characterRIM.getEpisode().get(characterRIM.getEpisode().size() - 1);
         String episodeId = RickAndMortySteps.extractIdFromUrl(lastEpisodeUrl);
+        log.info("Последний эпизод персонажа: ID " + episodeId);
 
         CharacterRIM lastCharacter = steps.getLastCharacterFromEpisode(episodeId);
         assertNotNull(lastCharacter, "Последний персонаж в эпизоде не найден");
+        log.info("Последний персонаж: " + lastCharacter.getName());
 
-        String mortySpecies = morty.getSpecies();
+        String mortySpecies = characterRIM.getSpecies();
         String lastCharSpecies = lastCharacter.getSpecies();
-
-        String mortyLocationName = morty.getLocation().getName();
+        String mortyLocationName = characterRIM.getLocation().getName();
         String lastCharLocationName = lastCharacter.getLocation().getName();
 
-        assertEquals(
-                mortySpecies,
-                lastCharSpecies,
-                "Раса Морти и последнего персонажа должна совпадать"
-        );
+        log.info("Раса Морти: " + mortySpecies);
+        log.info("Раса последнего персонажа: " + lastCharSpecies);
+        log.info("Локация Морти: " + mortyLocationName);
+        log.info("Локация последнего персонажа: " + lastCharLocationName);
 
-        assertNotEquals(
-                mortyLocationName,
-                lastCharLocationName,
-                "Местоположение Морти и последнего персонажа должно отличаться"
-        );
+
+        assertEquals(mortySpecies, lastCharSpecies, "Раса Морти и последнего персонажа должна совпадать");
+        log.info("Расы совпадают: " + mortySpecies);
+
+        assertNotEquals(mortyLocationName, lastCharLocationName, "Местоположение Морти и последнего персонажа должно отличаться");
+        log.info("Локации различаются: " + mortyLocationName + " ≠ " + lastCharLocationName);
+
     }
-
 }
