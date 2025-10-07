@@ -2,6 +2,7 @@ package ifellow.kireeva.steps;
 
 import ifellow.kireeva.pages.ProjectPage;
 import io.cucumber.java.ru.И;
+import io.cucumber.java.ru.Когда;
 import io.cucumber.java.ru.Тогда;
 import org.junit.jupiter.api.Assertions;
 
@@ -9,7 +10,7 @@ public class ProjectPageSteps {
 
     private final ProjectPage projectPage = new ProjectPage();
 
-    @И("пользователь ищет задачу {string}")
+    @Когда("пользователь ищет задачу {string}")
     public void userSearchesTask(String taskName) {
         projectPage.searchTask(taskName);
         System.out.println("Поиск задачи: " + taskName);

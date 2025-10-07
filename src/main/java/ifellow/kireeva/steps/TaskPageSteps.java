@@ -2,6 +2,7 @@ package ifellow.kireeva.steps;
 
 import ifellow.kireeva.pages.TaskPage;
 import io.cucumber.java.ru.И;
+import io.cucumber.java.ru.Когда;
 import io.cucumber.java.ru.Тогда;
 import org.junit.jupiter.api.Assertions;
 
@@ -14,7 +15,7 @@ public class TaskPageSteps {
         initialTaskCount = taskPage.getTaskCount();
     }
 
-    @И("создание новой баги Test Bug")
+    @Когда("созданием новый баг Test Bug")
     public void createNewBug() {
         taskPage.createNewTask();
     }
