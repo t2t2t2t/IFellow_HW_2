@@ -10,11 +10,13 @@ public class LoginPage {
 
     private final SelenideElement usernameField = $x("//input[@id='login-form-username']");
     private final SelenideElement passwordField = $x("//input[@id='login-form-password']");
-    private final SelenideElement loginButton = $x("//input[@id='login' and @value='Войти']");
+    private final SelenideElement loginButton = $x("//input[@id='login']");
 
     public void login (String username, String password) {
         usernameField.shouldBe(visible).setValue(username);
         passwordField.shouldBe(visible).setValue(password);
         loginButton.shouldBe(enabled).click();
     }
+
+
 }

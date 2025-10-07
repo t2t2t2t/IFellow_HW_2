@@ -21,6 +21,9 @@ public class CreateTaskModal {
     private final SelenideElement statusLabel = $x("//span[@id='status-val']");
     private final SelenideElement createdAlert = $x("//a[contains(@class,'issue-created')]");
 
+    private SelenideElement statusButton(String status) {
+        return $x("//a[./span[text()='" + status + "']]");
+    }
 
     public void setType(String type) {
 
@@ -94,8 +97,9 @@ public class CreateTaskModal {
         statusLabel.shouldBe(visible).shouldHave(text("Готово"));
     }
 
- private SelenideElement statusButton(String status) {
-        return $x("//a[./span[text()='" + status + "']]");
+
+    public void moveStatus(String status) {
+        statusButton("Бизнес-процесс").shouldBe(visible).click();
     }
 
 }
