@@ -18,8 +18,6 @@ public class ProjectPageSteps {
 
     @И("пользователь переходит в задачу")
     public void userOpensTask() {
-        // Если нужно кликнуть на задачу в результатах поиска
-        //projectPage.clickOnFirstSearchResult();
         System.out.println("Переход в задачу");
     }
 

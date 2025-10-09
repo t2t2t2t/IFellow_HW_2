@@ -12,14 +12,11 @@ public class WebHook {
 
     @Before
     public void initBrowser() {
-//        Configuration.pageLoadStrategy = PageLoadStrategy.EAGER.toString();
-//        Configuration.timeout = 10000;
-//        Selenide.open(CustomProperties.getInstance().getProperty("main.url"));
-//        getWebDriver().manage().window().maximize();
-        Configuration.pageLoadStrategy = PageLoadStrategy.EAGER.toString();
 
+        Configuration.pageLoadStrategy = PageLoadStrategy.EAGER.toString();
         Configuration.timeout = 30000;
         Configuration.pageLoadTimeout = 60000;
+
         Selenide.open(CustomProperties.getInstance().getProperty("main.url"));
 
         Selenide.webdriver().driver().getWebDriver().manage().window().maximize();

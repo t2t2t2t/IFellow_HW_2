@@ -64,6 +64,13 @@
     </dependency>
 
     <dependency>
+      <groupId>io.cucumber</groupId>
+      <artifactId>cucumber-junit-platform-engine</artifactId>
+      <version>7.10.0</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
       <groupId>com.codeborne</groupId>
       <artifactId>selenide</artifactId>
       <version>7.10.0</version>

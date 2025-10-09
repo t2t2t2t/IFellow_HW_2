@@ -15,7 +15,6 @@ public class LoginSteps {
     @Дано("пользователь авторизовался успешно в системе")
     @Когда("пользователь авторизовался в EduJira")
     public static void performLogin() {
-
         String username = CustomProperties.getInstance().getProperty("username");
         String password = CustomProperties.getInstance().getProperty("password");
         new LoginPage().login(username, password);
