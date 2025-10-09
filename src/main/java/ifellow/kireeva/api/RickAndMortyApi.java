@@ -16,24 +16,27 @@ public class RickAndMortyApi extends BaseApi {
     }
 
     public ValidatableResponse getCharacterByName(String name) {
-        return given()
-                .when()
-                .queryParam("name", name)
-                .get(CHARACTER_URL)
-                .then();
+        return sendGetRequestWithQueryParam(CHARACTER_URL, "name", name);
     }
 
     public ValidatableResponse getCharacterById(String id) {
-        return given()
-                .when()
-                .get(String.format("%s/%s", CHARACTER_URL, id))
-                .then();
+        return sendGetRequest(String.format("%s/%s", CHARACTER_URL, id));
     }
 
     public ValidatableResponse getEpisodeById(String id) {
+        return sendGetRequest(String.format("%s/%s", EPISODE_URL, id));
+    }
+
+    private ValidatableResponse sendGetRequestWithQueryParam(String url, String paramKey, String paramValue) {
         return given()
-                .when()
-                .get(String.format("%s/%s", EPISODE_URL, id))
+                .queryParam(paramKey, paramValue)
+                .get(url)
+                .then();
+    }
+
+    private ValidatableResponse sendGetRequest(String url) {
+        return given()
+                .get(url)
                 .then();
     }
 

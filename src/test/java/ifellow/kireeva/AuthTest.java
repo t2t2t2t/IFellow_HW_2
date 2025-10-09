@@ -5,14 +5,15 @@ import ifellow.kireeva.dto.auth.User;
 import ifellow.kireeva.steps.AuthSteps;
 import ifellow.kireeva.utils.FileUtil;
 import io.restassured.response.Response;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import java.util.logging.Logger;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+
 public class AuthTest {
 
     Logger log = Logger.getLogger(AuthTest.class.getName());
@@ -31,7 +32,6 @@ public class AuthTest {
     }
 
     @Test
-    @Order(1)
     void testRegistration() {
         Response response = authSteps.registerUser(
                 FileUtil.readFileFromResources("auth.json")
@@ -42,8 +42,8 @@ public class AuthTest {
     }
 
     @Test
-    @Order(2)
     void testLoginUserNotFound() throws Exception {
+
         User wrongUser = new User(
                 "не пользователь",
                 user.getPassword()
@@ -58,7 +58,6 @@ public class AuthTest {
     }
 
     @Test
-    @Order(3)
     void testLoginWrongPassword() throws Exception {
 
         User wrongPass = new User(
@@ -74,23 +73,29 @@ public class AuthTest {
     }
 
     @Test
-    @Order(4)
     void testLoginSuccess() {
 
-        Response response = authSteps.loginUser(
+        Response responseRegister = authSteps.registerUser(
                 FileUtil.readFileFromResources("auth.json")
         );
 
-        assertEquals(200, response.getStatusCode(), "Должен быть статус 200");
-        assertTrue(response.getBody().asString().contains("token"));
+        assertEquals(200, responseRegister.getStatusCode(), "Должен быть статус 200");
+        log.info("Тест регистрации пройден");
 
-        authToken = authSteps.extractTokenFromResponse(response);
+        Response responseLogin = authSteps.loginUser(
+                FileUtil.readFileFromResources("auth.json")
+        );
+
+        assertEquals(200, responseLogin.getStatusCode(), "Должен быть статус 200");
+
+        assertTrue(responseLogin.getBody().asString().contains("token"));
+
+        authToken = authSteps.extractTokenFromResponse(responseLogin);
 
         log.info("Тест пройден, Токен получен: " + authToken);
     }
 
     @Test
-    @Order(5)
     void testLogoutFailure() {
         Response response = authSteps.logoutUser("12345678-1234-1234-1234-123456789012");
 
@@ -100,12 +105,32 @@ public class AuthTest {
     }
 
     @Test
-    @Order(6)
     void testLogoutSuccess() {
-        Response response = authSteps.logoutUser(authToken);
 
-        assertEquals(200, response.getStatusCode(), "Должен быть статус 200");
-        assertTrue(response.getBody().asString().contains("success logout"));
-        log.info("Тест пройден, Выход успешен: " + response.getBody().asString());
+        Response responseRegister = authSteps.registerUser(
+                FileUtil.readFileFromResources("auth.json")
+        );
+
+        assertEquals(200, responseRegister.getStatusCode(), "Должен быть статус 200");
+        log.info("Тест регистрации пройден");
+
+        Response responseLogin = authSteps.loginUser(
+                FileUtil.readFileFromResources("auth.json")
+        );
+
+        assertEquals(200, responseLogin.getStatusCode(), "Должен быть статус 200");
+
+        assertTrue(responseLogin.getBody().asString().contains("token"));
+
+        authToken = authSteps.extractTokenFromResponse(responseLogin);
+
+        log.info("Тест пройден, Токен получен: " + authToken);
+
+
+        Response responseLogout = authSteps.logoutUser(authToken);
+
+        assertEquals(200, responseLogout.getStatusCode(), "Должен быть статус 200");
+        assertTrue(responseLogout.getBody().asString().contains("success logout"));
+        log.info("Тест пройден, Выход успешен: " + responseLogout.getBody().asString());
     }
 }

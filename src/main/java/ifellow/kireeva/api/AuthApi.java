@@ -17,25 +17,25 @@ public class AuthApi extends BaseAuthApi {
         super(URL);
     }
 
+
     public Response register(String jsonBody) {
-        return given()
-                .body(jsonBody)
-                .when()
-                .post(REGISTER_URL);
+        return sendPostRequest(REGISTER_URL, jsonBody);
     }
 
     public Response login(String jsonBody) {
-        return given()
-                .body(jsonBody)
-                .when()
-                .post(LOGIN_URL);
+        return sendPostRequest(LOGIN_URL, jsonBody);
     }
 
     public Response logout(String token) {
         return given()
                 .header("Authorization", token)
-                .when()
                 .get(LOGOUT_URL);
+    }
+
+    private Response sendPostRequest(String url, String body) {
+        return given()
+                .body(body)
+                .post(url);
     }
 
 }
