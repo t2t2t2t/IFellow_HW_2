@@ -1,4 +1,4 @@
-package ifellow.kireeva.model;
+package ifellow.kireeva.pages;
 
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
@@ -12,14 +12,12 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 
 
-public class CreateTaskModal {
+public class CreateTaskPage {
     private final SelenideElement fieldTaskType = $x("//input[@id='issuetype-field']");
     private final SelenideElement taskName = $x("//input[@id='summary']");
     private final SelenideElement createButton = $x("//input[@id='create-issue-submit']");
     private final SelenideElement taskButton = $x("//a[@id='create_link']");
     private final SelenideElement fieldLabels = $x("//textarea[@id='labels-textarea']");
-    private final SelenideElement statusLabel = $x("//span[@id='status-val']");
-    private final SelenideElement createdAlert = $x("//a[contains(@class,'issue-created')]");
 
     private SelenideElement statusButton(String status) {
         return $x("//a[./span[text()='" + status + "']]");
@@ -90,12 +88,6 @@ public class CreateTaskModal {
         createButton.click();
     }
 
-    public void closeTask() {
-        createdAlert.shouldBe(visible).click();
-        statusButton("Бизнес-процесс").shouldBe(visible).click();
-        statusButton("Выполнено").shouldBe(visible).click();
-        statusLabel.shouldBe(visible).shouldHave(text("Готово"));
-    }
 
 
     public void moveStatus(String status) {

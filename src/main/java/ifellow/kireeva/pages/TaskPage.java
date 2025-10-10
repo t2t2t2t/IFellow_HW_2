@@ -3,7 +3,6 @@ package ifellow.kireeva.pages;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
-import ifellow.kireeva.model.CreateTaskModal;
 import ifellow.kireeva.util.Util;
 
 import static com.codeborne.selenide.Selenide.$x;
@@ -20,8 +19,8 @@ public class TaskPage {
 
     public void createNewTask() {
         taskButton.click();
-        CreateTaskModal createTaskModal = new CreateTaskModal();
-        createTaskModal.createNewTask();
+        CreateTaskPage createTaskPage = new CreateTaskPage();
+        createTaskPage.createNewTask();
 
         taskButton.shouldHave(Condition.visible);
         Selenide.refresh();

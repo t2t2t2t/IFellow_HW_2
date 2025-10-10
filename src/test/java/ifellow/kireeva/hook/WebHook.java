@@ -1,4 +1,4 @@
-package ifellow.kireeva;
+package ifellow.kireeva.hook;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
