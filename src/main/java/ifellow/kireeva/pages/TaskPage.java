@@ -8,9 +8,8 @@ import ifellow.kireeva.util.Util;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class TaskPage {
-    private final SelenideElement taskCountElement = $x("//span[contains(text(), '1 из')]");
-    private final SelenideElement taskButton = $x("//a[@id='create_link']");
-
+    private final SelenideElement taskCountElement = $x("//span[contains(text(), '1 из')]").as("Элемент счётчика задач '1 из ...'");
+    private final SelenideElement taskButton = $x("//a[@id='create_link']").as("Кнопка 'Создать задачу'");
 
     public int getTaskCount() {
         return Util.countTask(taskCountElement.getText());

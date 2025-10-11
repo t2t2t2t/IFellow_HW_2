@@ -11,11 +11,10 @@ import static com.codeborne.selenide.Selenide.$x;
 
 public class ProjectPage {
 
-private final SelenideElement searchField = $x("//input[@id='quickSearchInput']");
-    private final ElementsCollection searchElements = $$x("//li[contains(@class,'quick-search-result-item')]");
-    private final SelenideElement taskStatus = $x("//span[contains(text(),'Сделать')]");
-    private final SelenideElement fixVersion = $x("//a[contains(text(), 'Version 2.0')]");
-
+    private final SelenideElement searchField = $x("//input[@id='quickSearchInput']").as("Поле быстрого поиска");
+    private final ElementsCollection searchElements = $$x("//li[contains(@class,'quick-search-result-item')]").as("Результаты быстрого поиска");
+    private final SelenideElement taskStatus = $x("//span[contains(text(),'Сделать')]").as("Статус задачи 'Сделать'");
+    private final SelenideElement fixVersion = $x("//a[contains(text(), 'Version 2.0')]").as("Версия исправления 'Version 2.0'");
 
 
     public void searchTask(String taskName) {

@@ -13,14 +13,14 @@ import static com.codeborne.selenide.Selenide.*;
 
 
 public class CreateTaskPage {
-    private final SelenideElement fieldTaskType = $x("//input[@id='issuetype-field']");
-    private final SelenideElement taskName = $x("//input[@id='summary']");
-    private final SelenideElement createButton = $x("//input[@id='create-issue-submit']");
-    private final SelenideElement taskButton = $x("//a[@id='create_link']");
-    private final SelenideElement fieldLabels = $x("//textarea[@id='labels-textarea']");
+    private final SelenideElement fieldTaskType = $x("//input[@id='issuetype-field']").as("Поле 'Тип задачи'");
+    private final SelenideElement taskName = $x("//input[@id='summary']").as("Поле 'Название задачи'");
+    private final SelenideElement createButton = $x("//input[@id='create-issue-submit']").as("Кнопка 'Создать'");
+    private final SelenideElement taskButton = $x("//a[@id='create_link']").as("Кнопка 'Создать задачу'");
+    private final SelenideElement fieldLabels = $x("//textarea[@id='labels-textarea']").as("Поле 'Метки'");
 
     private SelenideElement statusButton(String status) {
-        return $x("//a[./span[text()='" + status + "']]");
+        return $x("//a[./span[text()='" + status + "']]").as("Кнопка статуса: " + status);
     }
 
     public void setType(String type) {
