@@ -5,39 +5,38 @@ import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import ifellow.kireeva.util.CustomProperties;
 import io.qameta.allure.selenide.AllureSelenide;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.PageLoadStrategy;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
 
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 
 public class WebHook {
 
-    @BeforeSuite
+
+    @BeforeAll
     public static void setUpAllure() {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
                 .screenshots(true)
                 .savePageSource(true));
     }
 
-    @BeforeSuite(dependsOnMethods = "setUpAllure")
+    @BeforeAll
     public static void loadConfig() {
         Configuration.pageLoadStrategy = PageLoadStrategy.EAGER.toString();
-        Configuration.timeout = 15000;
-
+        Configuration.timeout = 15_000;
     }
 
-    @BeforeMethod
+    @BeforeEach
     public void initBrowser() {
-        System.out.println(CustomProperties.getInstance().getProperty("main.url"));
         Selenide.open(CustomProperties.getInstance().getProperty("main.url"));
         getWebDriver().manage().window().maximize();
     }
 
-    @AfterMethod
+    @AfterEach
     public void afterTest() {
-         Selenide.closeWebDriver();
+        Selenide.closeWebDriver();
     }
 }

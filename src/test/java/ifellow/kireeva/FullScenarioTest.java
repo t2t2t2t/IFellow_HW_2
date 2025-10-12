@@ -1,31 +1,58 @@
 package ifellow.kireeva;
 
-import com.codeborne.selenide.Selenide;
-import ifellow.kireeva.model.CreateTaskModal;
-import ifellow.kireeva.pages.*;
-import org.testng.annotations.Test;
+import ifellow.kireeva.pages.CreateTaskPage;
+import ifellow.kireeva.pages.DashboardPage;
+import ifellow.kireeva.pages.ProjectPage;
+import ifellow.kireeva.pages.TaskPage;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selenide.webdriver;
 import static com.codeborne.selenide.WebDriverConditions.url;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 public class FullScenarioTest extends WebHook {
 
-    @Test(description = "Полный сценарий: авторизация, проверка задач, создание и закрытие бага")
-    public void testFullScenario() {
-
+    @Test
+    @DisplayName("Авторизоваться в edujira.ifellow.ru")
+    public void testLogin() {
         performLogin();
+        webdriver().shouldHave(url("https://edujira.ifellow.ru/secure/Dashboard.jspa"));
+    }
 
+
+    @Test
+    @DisplayName("Переход в проект 'Test'")
+    public void testNavigateToTestProject() {
+        performLogin();
         navigateToTestProject();
+    }
 
+    @Test
+    @DisplayName("Проверка количества задач")
+    public void testTaskCountIncreasesAfterCreation() {
+        performLogin();
+        navigateToTestProject();
         verifyTaskCountIncrease();
+    }
 
+    @Test
+    @DisplayName("Проверка задачи TestSeleniumATHomework")
+    public void testSeleniumTaskDetails() {
+        performLogin();
+        navigateToTestProject();
         verifySeleniumTaskDetails();
+    }
 
+
+    @Test
+    @DisplayName("Создание и закрытие бага")
+    public void testCreateAndCloseBug() {
+        performLogin();
+        navigateToTestProject();
         createAndCloseBug();
-
-        //Selenide.sleep(60_000);
     }
 
 
@@ -61,7 +88,7 @@ public class FullScenarioTest extends WebHook {
 
 
     private void createAndCloseBug() {
-        CreateTaskModal createTaskModal = new CreateTaskModal();
+        CreateTaskPage createTaskModal = new CreateTaskPage();
         createTaskModal.createTaskBug();
         createTaskModal.closeTask();
 

@@ -1,1 +1,7 @@
-
+.idea/
+target/
+build/
+.allure/
+allure-results/
+/.idea/
+/image/

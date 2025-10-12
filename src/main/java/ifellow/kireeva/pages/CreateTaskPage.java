@@ -1,7 +1,8 @@
-package ifellow.kireeva.model;
+package ifellow.kireeva.pages;
 
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 
@@ -12,15 +13,19 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 
 
-public class CreateTaskModal {
-    private final SelenideElement fieldTaskType = $x("//input[@id='issuetype-field']");
-    private final SelenideElement taskName = $x("//input[@id='summary']");
-    private final SelenideElement createButton = $x("//input[@id='create-issue-submit']");
-    private final SelenideElement taskButton = $x("//a[@id='create_link']");
-    private final SelenideElement fieldLabels = $x("//textarea[@id='labels-textarea']");
-    private final SelenideElement statusLabel = $x("//span[@id='status-val']");
-    private final SelenideElement createdAlert = $x("//a[contains(@class,'issue-created')]");
+public class CreateTaskPage {
+    private final SelenideElement fieldTaskType = $x("//input[@id='issuetype-field']").as("Поле 'Тип задачи'");
+    private final SelenideElement taskName = $x("//input[@id='summary']").as("Поле 'Название задачи'");
+    private final SelenideElement createButton = $x("//input[@id='create-issue-submit']").as("Кнопка 'Создать'");
+    private final SelenideElement taskButton = $x("//a[@id='create_link']").as("Кнопка 'Создать задачу'");
+    private final SelenideElement fieldLabels = $x("//textarea[@id='labels-textarea']").as("Поле 'Метки'");
+    private final SelenideElement createdAlert = $x("//a[contains(@class,'issue-created')]").as("Уведомление о созданной задаче");
+    private final SelenideElement statusLabel = $x("//span[@id='status-val']").as("Метка текущего статуса задачи");
 
+
+    private SelenideElement statusButton(String status) {
+        return $x("//a[./span[text()='" + status + "']]").as("Кнопка статуса: " + status);
+    }
 
     public void setType(String type) {
 
@@ -73,6 +78,7 @@ public class CreateTaskModal {
         switchTo().defaultContent();
     }
 
+    @Step("Создать баг")
     public void createTaskBug() {
         taskButton.click();
 
@@ -87,6 +93,7 @@ public class CreateTaskModal {
         createButton.click();
     }
 
+    @Step("Закрыть задачу")
     public void closeTask() {
         createdAlert.shouldBe(visible).click();
         statusButton("Бизнес-процесс").shouldBe(visible).click();
@@ -94,8 +101,5 @@ public class CreateTaskModal {
         statusLabel.shouldBe(visible).shouldHave(text("Готово"));
     }
 
- private SelenideElement statusButton(String status) {
-        return $x("//a[./span[text()='" + status + "']]");
-    }
 
 }
