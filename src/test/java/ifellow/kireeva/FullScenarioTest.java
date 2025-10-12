@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class FullScenarioTest extends WebHook {
 
     @Test
-    @DisplayName("Авторизоваться в edujira.ifellow.ru")
+    @DisplayName("Авторизоваться")
     public void testLogin() {
         performLogin();
         webdriver().shouldHave(url("https://edujira.ifellow.ru/secure/Dashboard.jspa"));
