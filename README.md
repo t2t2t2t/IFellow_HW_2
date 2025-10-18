@@ -26,9 +26,9 @@
 
 ### Для создания отчета в консоли прописать:
 
-`mvn allure:serve`
-
 `mvn allure:report`
+
+`mvn allure:serve`
 
 ## Скриншоты отчета allure
 

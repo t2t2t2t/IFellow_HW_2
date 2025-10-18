@@ -3,7 +3,6 @@ package ifellow.kireeva.hooks;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
-import ifellow.kireeva.pages.LoginPage;
 import ifellow.kireeva.util.CustomProperties;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterEach;
@@ -33,11 +32,6 @@ public class WebHook {
     @BeforeEach
     public void initBrowser() {
         Selenide.open(CustomProperties.getInstance().getProperty("main.url"));
-        LoginPage loginPage = new LoginPage();
-        loginPage.login(
-                CustomProperties.getInstance().getProperty("username"),
-                CustomProperties.getInstance().getProperty("password")
-        );
         getWebDriver().manage().window().maximize();
     }
 
