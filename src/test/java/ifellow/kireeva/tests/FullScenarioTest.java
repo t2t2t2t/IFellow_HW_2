@@ -1,5 +1,6 @@
-package ifellow.kireeva;
+package ifellow.kireeva.tests;
 
+import ifellow.kireeva.hooks.WebHook;
 import ifellow.kireeva.pages.CreateTaskPage;
 import ifellow.kireeva.pages.DashboardPage;
 import ifellow.kireeva.pages.ProjectPage;
@@ -57,7 +58,6 @@ public class FullScenarioTest extends WebHook {
 
 
     public void performLogin() {
-        LoginHelper.performLogin();
         webdriver().shouldHave(url("https://edujira.ifellow.ru/secure/Dashboard.jspa"));
     }
 
