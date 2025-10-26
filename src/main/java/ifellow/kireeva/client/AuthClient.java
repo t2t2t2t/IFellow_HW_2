@@ -1,14 +1,13 @@
-package ifellow.kireeva.steps;
+package ifellow.kireeva.client;
 
 import ifellow.kireeva.api.AuthApi;
 import io.restassured.response.Response;
 
-public class AuthSteps {
+public class AuthClient {
     private final AuthApi authApi = new AuthApi();
 
     public Response registerUser(String jsonBody) {
-        Response response = authApi.register(jsonBody);
-        return response;
+        return authApi.register(jsonBody);
     }
 
     public Response loginUser(String jsonBody) {

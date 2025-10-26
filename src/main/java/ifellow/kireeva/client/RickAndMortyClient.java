@@ -1,10 +1,10 @@
-package ifellow.kireeva.steps;
+package ifellow.kireeva.client;
 
 import ifellow.kireeva.api.RickAndMortyApi;
 import ifellow.kireeva.dto.rickandmorty.character.CharacterRIM;
 import org.apache.http.HttpStatus;
 
-public class RickAndMortySteps {
+public class RickAndMortyClient {
     private final RickAndMortyApi rickAndMortyApi = new RickAndMortyApi();
 
     public CharacterRIM getCharacterByName(String name) {

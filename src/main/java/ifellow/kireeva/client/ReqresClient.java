@@ -1,11 +1,11 @@
-package ifellow.kireeva.steps;
+package ifellow.kireeva.client;
 
 import ifellow.kireeva.api.ReqresApi;
 import io.restassured.response.Response;
 
 import java.util.Map;
 
-public class ReqresSteps {
+public class ReqresClient {
 
     private final ReqresApi reqresApi = new ReqresApi();
 

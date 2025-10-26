@@ -8,7 +8,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-
 @NoArgsConstructor
 public class Location {
     private String name;
