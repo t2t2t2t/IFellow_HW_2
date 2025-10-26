@@ -1,13 +1,6 @@
 # Финальное задание FHW_API
 
-## Использовалось:
-
-- Java 17
-- Cucumber
-- RestAssured
-- Allure
-
-## Тесты покрывают следующие сценарии:
+## Тесты:
 
 ### 1. Rick and Morty API
 
@@ -50,3 +43,10 @@ https://github.com/SNVKEZ/ForIFellowSchAT
 `mvn allure:report`
 
 `mvn allure:serve`
+
+## Использовалось:
+
+- Java 17
+- Cucumber
+- RestAssured
+- Allure
