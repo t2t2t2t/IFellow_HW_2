@@ -32,7 +32,6 @@ https://github.com/SNVKEZ/ForIFellowSchAT
     - Невалидный токен → статус 401.
     - Валидный токен → статус 200, тело: `"success logout"`.
 
----
 
 ### Для запуска тестов:
 
