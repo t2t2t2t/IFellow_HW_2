@@ -1,13 +1,7 @@
 # Финальное задание FHW_UI
 
-## Использовалось:
 
-- **Selenide** для работы с веб-интерфейсом
-- **JUnit 5** фреймворка для запуска тестов
-- **Allure Report** для генерации отчётов
-- **XPath** локаторы
-
-## Тесты покрывают следующий сценарий:
+## Тесты:
 
 1. Авторизация в системе
 2. Переход в проект Test
@@ -35,3 +29,10 @@
 ![image](https://github.com/t2t2t2t/ImageForReadMe/blob/main/imageHW/main.jpg)
 
 ![image](https://github.com/t2t2t2t/ImageForReadMe/blob/main/imageHW/behaviors.jpg)
+
+## Использовалось:
+
+- **Selenide** для работы с веб-интерфейсом
+- **JUnit 5** фреймворка для запуска тестов
+- **Allure Report** для генерации отчётов
+- **XPath** локаторы
